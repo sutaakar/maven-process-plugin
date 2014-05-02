@@ -24,7 +24,7 @@ Process Executor Plugin allows you to specify multiple processes to start in pre
 * workingDir: Give a working directory for your process to start in. Could be same as name.
 * waitForInterrupt: Optional. Setting this value to true will pause your build after starting every process to give you a chance to manually play with your system. Default is false.
 * healthcheckUrl: Recommended, but optional. You should provide a healthcheck url, so the plugin waits until the healthchecks are all green for your process. If not provided, the plugin waits for 30 seconds before moving on.
-* processLogFile: Optional. Specifying log file will redirect the process output to the specified file. Recommended as this will avoid cluttering your build's log with the log of external proccesses.
+* processLogFile: Optional. Specifying a log file will redirect the process output to the specified file. Recommended as this will avoid cluttering your build's log with the log of external proccesses.
 
 ## POM example:
     
