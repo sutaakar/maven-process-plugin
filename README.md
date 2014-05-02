@@ -1,7 +1,5 @@
-process-exec-maven-plugin
-==========================
-
 Process Executor Plugin
+=====================
 
 ## Arguments
 * arguments: Commandline arguments as you would provide when starting a process builder in Java. So, for example to run something like this
@@ -91,6 +89,4 @@ Process Executor Plugin
         </profile>
     </profiles>
     ```
-
-
 
