@@ -1,12 +1,17 @@
-Process Executor Plugin
-=====================
+process-exec-maven-plugin
+========================
+
+Process Executor Plugin allows you to specify multiple processes to start in pre-integration phase (external dependencies), and then stops all the processes in post-integration phase.
 
 ## Arguments
 * arguments: Commandline arguments as you would provide when starting a process builder in Java. So, for example to run something like this
     ```bash
     java -jar drop-wizard-app.jar server config.yaml
     ```
+
     set arguments as:
+
+    ```
     <arguments>
         <argument>java</argument>
         <argument>-jar</argument>
@@ -14,11 +19,11 @@ Process Executor Plugin
         <argument>server</argument>
         <argument>config.yaml</argument>
     </arguments>
-
-
-* name: Given name to the process to start
+    ```
+* name: Give a name to the process to start
 * workingDir: Give a working directory for your process to start in. Could be same as name.
-* waitForInterrupt: Optional. Setting this value to true will pause your build after starting every process to give you a chance to manually play with your system.
+* waitForInterrupt: Optional. Setting this value to true will pause your build after starting every process to give you a chance to manually play with your system. Default is false.
+* healthcheckUrl: Recommended, but optional. You should provide a healthcheck url, so the plugin waits until the healthchecks are all green for your process. If not provided, the plugin waits for 30 seconds before moving on.
 
 ## POM example:
     ```
