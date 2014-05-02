@@ -16,15 +16,15 @@ import java.util.Set;
 public class ExecProcess {
     private Process process = null;
     private Set<StdoutRedirector> redirectors = new HashSet<StdoutRedirector>();
-    private File emoLogFile = null;
+    private File processLogFile = null;
     private final String name;
 
     public ExecProcess(String name) {
         this.name = name;
     }
 
-    public void setEmoLogFile(File emoLogFile) {
-        this.emoLogFile = emoLogFile;
+    public void setProcessLogFile(File emoLogFile) {
+        this.processLogFile = emoLogFile;
     }
 
     public String getName() {
@@ -46,28 +46,18 @@ public class ExecProcess {
 
     private List<String> buildCommandLineArguments(String... args) {
         final List<String> commandLineArguments = Lists.newArrayList();
-//        commandLineArguments.add("java");
-//        commandLineArguments.add("-Xmx" + maxMemoryMegabytes + "m");
-//        if (debugPort > 0) {
-//            commandLineArguments.add("-Xdebug");
-//            final String suspend = suspendDebugOnStartup ? "y" : "n";
-//            commandLineArguments.add("-Xrunjdwp:transport=dt_socket,server=y,suspend=" + suspend + ",address=" + debugPort);
-//        }
-//        commandLineArguments.add("-Djava.awt.headless=true");
-//        commandLineArguments.add("-jar");
-//        commandLineArguments.add("emodb.jar");
         Collections.addAll(commandLineArguments, args);
         return commandLineArguments;
     }
 
     private void pumpOutputToLog(Process process, Log mavenLog) {
-        if (emoLogFile == null) {
+        if (processLogFile == null) {
             // pump to maven log
             redirectors.add(new StdoutRedirector(new InputStreamReader(process.getInputStream()), new MavenLogOutputStream(mavenLog, MavenLogOutputStream.INFO)));
             redirectors.add(new StdoutRedirector(new InputStreamReader(process.getErrorStream()), new MavenLogOutputStream(mavenLog, MavenLogOutputStream.ERROR)));
         } else {
             // pump to file log
-            final FileOutputStream out = openFileOutputStream(emoLogFile);
+            final FileOutputStream out = openFileOutputStream(processLogFile);
             redirectors.add(new StdoutRedirector(new InputStreamReader(process.getInputStream()), out));
             redirectors.add(new StdoutRedirector(new InputStreamReader(process.getErrorStream()), out));
         }

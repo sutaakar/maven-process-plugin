@@ -29,6 +29,9 @@ public class ProcessStartMojo extends AbstractProcessMojo {
 
     private void startProcess() throws MojoExecutionException, MojoFailureException, IOException {
         final ExecProcess exec = new ExecProcess(name);
+        if (null != processLogFile) {
+            exec.setProcessLogFile(new File(processLogFile));
+        }
         getLog().info("Starting process: " + exec.getName());
         exec.execute(processWorkingDirectory(), getLog(), arguments);
         CrossMojoState.addProcess(exec, getPluginContext());
