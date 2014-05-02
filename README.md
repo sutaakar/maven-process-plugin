@@ -26,7 +26,7 @@ Process Executor Plugin allows you to specify multiple processes to start in pre
 * healthcheckUrl: Recommended, but optional. You should provide a healthcheck url, so the plugin waits until the healthchecks are all green for your process. If not provided, the plugin waits for 30 seconds before moving on.
 
 ## POM example:
-    ```
+    
     <profiles>
         <profile>
             <id>create-qa-dimsum</id>
@@ -93,5 +93,4 @@ Process Executor Plugin allows you to specify multiple processes to start in pre
             </build>
         </profile>
     </profiles>
-    ```
-
+    
