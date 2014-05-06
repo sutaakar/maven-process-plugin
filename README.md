@@ -38,7 +38,7 @@ Process Executor Plugin allows you to specify multiple processes to start in pre
                 <executions>
                     <!--Start process 1, eg., a dropwizard app dependency-->
                     <execution>
-                        <id>emodb-shovel-process</id>
+                        <id>switchboard-process</id>
                         <phase>pre-integration-test</phase>
                         <goals>
                             <goal>start</goal>
