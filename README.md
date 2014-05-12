@@ -1,10 +1,14 @@
 process-exec-maven-plugin
 ========================
 
-Process Executor Plugin allows you to specify multiple processes to start in pre-integration phase (external dependencies), and then stops all the processes in post-integration phase.
+Improve end-to-end integration testing with maven. Process Executor Plugin allows you to to start multiple processes in pre-integration phase in order, and then stops all the processes in post-integration phase, in reverse order. 
+
+## Goals
+* __start__ - Pre-Integration phase. Starts a given process in the pre-integration phase. Requires one execution per process.
+* __stop-all__ - Post-Integration phase. Stops all processes that are started in the pre-integration phase, in reverse order. Requires only one execution for all processes. 
 
 ## Arguments
-* arguments: Commandline arguments as you would provide when starting a process builder in Java. So, for example to run something like this
+* __arguments__: Command line arguments as you would provide when starting a process in your terminal. So, for example to run something like this
     ```bash
     java -jar drop-wizard-app.jar server config.yaml
     ```
@@ -20,11 +24,11 @@ Process Executor Plugin allows you to specify multiple processes to start in pre
         <argument>config.yaml</argument>
     </arguments>
     ```
-* name: Give a name to the process to start
-* workingDir: Give a working directory for your process to start in. Could be same as name.
-* waitForInterrupt: Optional. Setting this value to true will pause your build after starting every process to give you a chance to manually play with your system. Default is false.
-* healthcheckUrl: Recommended, but optional. You should provide a healthcheck url, so the plugin waits until the healthchecks are all green for your process. If not provided, the plugin waits for 30 seconds before moving on.
-* processLogFile: Optional. Specifying a log file will redirect the process output to the specified file. Recommended as this will avoid cluttering your build's log with the log of external proccesses.
+* __name__: Give a name to the process to start
+* __workingDir__: Give a working directory for your process to start in. Could be same as name.
+* __waitForInterrupt__: Optional. Setting this value to true will pause your build after starting every process to give you a chance to manually play with your system. Default is false.
+* __healthcheckUrl__: Recommended, but optional. You should provide a healthcheck url, so the plugin waits until the healthchecks are all green for your process. If not provided, the plugin waits for 30 seconds before moving on.
+* __processLogFile__: Optional. Specifying a log file will redirect the process output to the specified file. Recommended as this will avoid cluttering your build's log with the log of external proccesses.
 
 ## POM example:
     
