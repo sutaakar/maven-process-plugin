@@ -1,11 +1,11 @@
 process-exec-maven-plugin
 ========================
 
-Improve end-to-end integration testing with maven. Process Executor Plugin allows you to to start multiple processes in pre-integration phase in order, and then stops all the processes in post-integration phase, in reverse order. 
+Improve end-to-end integration testing with maven. Process Executor Plugin allows you to to start multiple processes in pre-integration-test phase in order, and then stops all the processes in post-integration-test phase, in reverse order. 
 
 ## Goals
-* __start__ - Pre-Integration-test phase. Starts a given process in the pre-integration phase. Requires one execution per process.
-* __stop-all__ - Post-Integration-test phase. Stops all processes that are started in the pre-integration phase, in reverse order. Requires only one execution for all processes. 
+* __start__ - Pre-Integration-test phase. Starts a given process in the pre-integration-test phase. Requires one execution per process.
+* __stop-all__ - Post-Integration-test phase. Stops all processes that are started in the pre-integration-test phase, in reverse order. Requires only one execution for all processes. 
 
 ## Arguments
 * __arguments__: Command line arguments as you would provide when starting a process in your terminal. So, for example to run something like this
