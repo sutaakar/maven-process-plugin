@@ -16,7 +16,9 @@
     <name>Process execution maven plugin</name>
 
     <scm>
+        <url>https://github.com/bazaarvoice/maven-process-plugin</url>
         <connection>scm:git:git@github.com:bazaarvoice/maven-process-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:bazaarvoice/maven-process-plugin.git</developerConnection>
     </scm>
 
     <properties>
