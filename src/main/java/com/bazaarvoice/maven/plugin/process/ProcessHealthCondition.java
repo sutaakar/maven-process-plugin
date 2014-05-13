@@ -28,7 +28,7 @@ public class ProcessHealthCondition {
                 return; // success!!!
             }
         }
-        throw new RuntimeException("emo service was not healthy even after " + timeoutInSeconds + " seconds");
+        throw new RuntimeException("Process was not healthy even after " + timeoutInSeconds + " seconds");
     }
 
     private static boolean is200(URL url) {

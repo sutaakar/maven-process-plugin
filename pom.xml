@@ -22,7 +22,7 @@
     <properties>
         <guava.version>15.0</guava.version>
         <mavenVersion>3.0</mavenVersion>
-        <jackson.version>2.1.1</jackson.version> <!-- note: aws-java-sdk 1.6.12 depends on jackson 2.1.1, restated here for clarity -->
+        <jackson.version>2.1.1</jackson.version>
     </properties>
 
     <dependencies>
