@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.bazaarvoice.maven.plugins</groupId>
-        <artifactId>maven-plugins-parent</artifactId>
-        <version>1.3</version>
+        <groupId>com.bazaarvoice.commons</groupId>
+        <artifactId>bv-opensource-super-pom</artifactId>
+        <version>1.0</version>
     </parent>
 
     <groupId>com.bazaarvoice.maven.plugins</groupId>
@@ -21,6 +21,7 @@
 
     <properties>
         <guava.version>15.0</guava.version>
+        <mavenVersion>3.0</mavenVersion>
         <jackson.version>2.1.1</jackson.version> <!-- note: aws-java-sdk 1.6.12 depends on jackson 2.1.1, restated here for clarity -->
     </properties>
 
