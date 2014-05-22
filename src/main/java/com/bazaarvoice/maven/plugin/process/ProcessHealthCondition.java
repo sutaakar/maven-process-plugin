@@ -2,7 +2,7 @@ package com.bazaarvoice.maven.plugin.process;
 
 import java.io.Closeable;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -10,14 +10,14 @@ import java.net.URL;
 
 public class ProcessHealthCondition {
     private static final int SECONDS_BETWEEN_CHECKS = 1;
-    private static final int SECONDS_TO_WAIT_WHEN_NO_HEALTHCHECK = 30;
 
     private ProcessHealthCondition() {}
 
     public static void waitSecondsUntilHealthy(String healthCheckUrl, int timeoutInSeconds) {
         if (healthCheckUrl == null) {
             // Wait for some arbitrary time to give the process to come up
-            sleep(SECONDS_TO_WAIT_WHEN_NO_HEALTHCHECK);
+            System.out.println("waiting for: " + timeoutInSeconds);
+            sleep(timeoutInSeconds);
             return;
         }
         final long start = System.currentTimeMillis();
@@ -41,18 +41,19 @@ public class ProcessHealthCondition {
     }
 
     private static int getResponseCode(URL url) {
-        OutputStream out = null;
+        InputStream in = null;
         try {
             final HttpURLConnection http = (HttpURLConnection) url.openConnection();
             http.setRequestMethod("GET");
             http.connect();
+            in = http.getInputStream();
             return http.getResponseCode();
         } catch (ProtocolException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
-            closeQuietly(out);
+            closeQuietly(in);
         }
     }
 

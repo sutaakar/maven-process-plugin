@@ -25,9 +25,10 @@ Improve end-to-end integration testing with maven. Process Executor Plugin allow
     </arguments>
     ```
 * __name__: Give a name to the process to start
-* __workingDir__: Give a working directory for your process to start in. Could be same as name.
+* __workingDir__: Give a working directory for your process to start in. Could be same as name. If not provided, the build directory is used.
 * __waitForInterrupt__: Optional. Setting this value to true will pause your build after starting every process to give you a chance to manually play with your system. Default is false.
-* __healthcheckUrl__: Recommended, but optional. You should provide a healthcheck url, so the plugin waits until the healthchecks are all green for your process. If not provided, the plugin waits for 30 seconds before moving on.
+* __healthcheckUrl__: Recommended, but optional. You should provide a healthcheck url, so the plugin waits until the healthchecks are all green for your process. If not provided, the plugin waits for `waitAfterLaunch` seconds before moving on.
+* __waitAfterLaunch__: Optional. This specifies the maximum time in seconds to wait after launching the process. If healthcheckUrl is specified, then it will move on as soon as the health checks pass. Default is 30 seconds.
 * __processLogFile__: Optional. Specifying a log file will redirect the process output to the specified file. Recommended as this will avoid cluttering your build's log with the log of external proccesses.
 
 ## POM example:

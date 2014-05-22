@@ -41,7 +41,7 @@ public class StdoutRedirector extends Thread {
         } finally {
             if (out != null) {
                 try {
-                    out.flush();
+                    out.close();
                 } catch (IOException e) { // silent
                 }
             }

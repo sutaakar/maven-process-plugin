@@ -8,14 +8,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ExecProcess {
     private Process process = null;
-    private Set<StdoutRedirector> redirectors = new HashSet<StdoutRedirector>();
+    private final List<StdoutRedirector> redirectors = Lists.newArrayList();
     private File processLogFile = null;
     private final String name;
 
@@ -35,19 +32,13 @@ public class ExecProcess {
         final ProcessBuilder pb = new ProcessBuilder();
         log.info("Using working directory for this process: " + workingDirectory);
         pb.directory(workingDirectory);
-        pb.command(buildCommandLineArguments(args));
+        pb.command(args);
         try {
             process = pb.start();
             pumpOutputToLog(process, log);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private List<String> buildCommandLineArguments(String... args) {
-        final List<String> commandLineArguments = Lists.newArrayList();
-        Collections.addAll(commandLineArguments, args);
-        return commandLineArguments;
     }
 
     private void pumpOutputToLog(Process process, Log mavenLog) {
