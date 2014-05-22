@@ -8,8 +8,6 @@ import org.apache.maven.plugins.annotations.Mojo;
 import java.io.File;
 import java.io.IOException;
 
-import static com.google.inject.internal.util.Preconditions.checkNotNull;
-
 @Mojo (name = "start", defaultPhase = LifecyclePhase.PRE_INTEGRATION_TEST)
 public class ProcessStartMojo extends AbstractProcessMojo {
 

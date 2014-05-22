@@ -15,8 +15,7 @@ public class ProcessHealthCondition {
 
     public static void waitSecondsUntilHealthy(String healthCheckUrl, int timeoutInSeconds) {
         if (healthCheckUrl == null) {
-            // Wait for some arbitrary time to give the process to come up
-            System.out.println("waiting for: " + timeoutInSeconds);
+            // Wait for timeout seconds to let the process come up
             sleep(timeoutInSeconds);
             return;
         }
