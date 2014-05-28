@@ -27,7 +27,7 @@ public class ProcessStartMojo extends AbstractProcessMojo {
         }
     }
 
-    private void startProcess() throws MojoExecutionException, MojoFailureException, IOException {
+    private void startProcess() {
         final ExecProcess exec = new ExecProcess(name);
         if (null != processLogFile) {
             exec.setProcessLogFile(new File(processLogFile));
@@ -35,11 +35,14 @@ public class ProcessStartMojo extends AbstractProcessMojo {
         getLog().info("Starting process: " + exec.getName());
         exec.execute(processWorkingDirectory(), getLog(), arguments);
         CrossMojoState.addProcess(exec, getPluginContext());
-        ProcessHealthCondition.waitSecondsUntilHealthy(healthcheckUrl, 60);
+        ProcessHealthCondition.waitSecondsUntilHealthy(healthcheckUrl, waitAfterLaunch);
         getLog().info("Started process: " + exec.getName());
     }
 
     private File processWorkingDirectory() {
+        if (workingDir == null) {
+            return ensureDirectory(new File(project.getBuild().getDirectory()));
+        }
         return ensureDirectory(new File(project.getBuild().getDirectory(), workingDir));
     }
 
