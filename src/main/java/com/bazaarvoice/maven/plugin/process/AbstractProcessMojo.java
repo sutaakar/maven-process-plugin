@@ -6,6 +6,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
 import java.io.File;
+import java.io.IOException;
 
 public abstract class AbstractProcessMojo extends AbstractMojo {
     @Component
@@ -39,4 +40,14 @@ public abstract class AbstractProcessMojo extends AbstractMojo {
         return dir;
     }
 
+    protected void sleepUntilInterrupted() throws IOException {
+        getLog().info("Hit ENTER on the console to continue the build.");
+
+        for (;;) {
+            int ch = System.in.read();
+            if (ch == -1 || ch == '\n') {
+                break;
+            }
+        }
+    }
 }

@@ -5,6 +5,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
+import java.io.IOException;
 import java.util.Stack;
 
 @Mojo (name = "stop-all", defaultPhase = LifecyclePhase.POST_INTEGRATION_TEST)
@@ -24,6 +25,15 @@ public class ProcessStopMojo extends AbstractProcessMojo {
     }
 
     private void stopAllProcesses() {
+        if (waitForInterrupt) {
+            getLog().info("Waiting for interrupt before stopping all processes ...");
+            try {
+                sleepUntilInterrupted();
+            } catch (IOException e) {
+                getLog().error(e);
+            }
+        }
+
         getLog().info("Stopping all processes ...");
         Stack<ExecProcess> processesStack = CrossMojoState.getProcesses(getPluginContext());
         while(!processesStack.isEmpty()) {

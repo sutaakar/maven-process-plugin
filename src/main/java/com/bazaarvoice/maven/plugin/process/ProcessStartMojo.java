@@ -6,7 +6,6 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
 import java.io.File;
-import java.io.IOException;
 
 @Mojo (name = "start", defaultPhase = LifecyclePhase.PRE_INTEGRATION_TEST)
 public class ProcessStartMojo extends AbstractProcessMojo {
@@ -44,17 +43,6 @@ public class ProcessStartMojo extends AbstractProcessMojo {
             return ensureDirectory(new File(project.getBuild().getDirectory()));
         }
         return ensureDirectory(new File(project.getBuild().getDirectory(), workingDir));
-    }
-
-    private void sleepUntilInterrupted() throws IOException {
-        getLog().info("Hit ENTER on the console to continue the build.");
-
-        for (;;) {
-            int ch = System.in.read();
-            if (ch == -1 || ch == '\n') {
-                break;
-            }
-        }
     }
 
 }
