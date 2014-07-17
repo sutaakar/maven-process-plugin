@@ -1,5 +1,6 @@
 package com.bazaarvoice.maven.plugin.process;
 
+import com.google.common.base.Joiner;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -13,16 +14,22 @@ public class ProcessStartMojo extends AbstractProcessMojo {
     @Override
     public void execute()
             throws MojoExecutionException, MojoFailureException {
-        for(String arg : arguments) {
-            getLog().info("arg: " + arg);
-        }
-        try {
-            startProcess();
-            if (waitForInterrupt) {
-                sleepUntilInterrupted();
+
+        if (!skip) {
+            for (String arg : arguments) {
+                getLog().info("arg: " + arg);
             }
-        } catch (Exception e) {
-            getLog().error(e);
+            getLog().info("Full command line: " + Joiner.on(" ").join(arguments));
+            try {
+                startProcess();
+                if (waitForInterrupt) {
+                    sleepUntilInterrupted();
+                }
+            } catch (Exception e) {
+                getLog().error(e);
+            }
+        } else {
+            getLog().info("Skipping " + name + " due to configuration skip=true");
         }
     }
 
