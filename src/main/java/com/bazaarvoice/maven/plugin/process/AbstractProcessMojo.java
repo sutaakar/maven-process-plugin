@@ -33,6 +33,9 @@ public abstract class AbstractProcessMojo extends AbstractMojo {
     @Parameter(required = false, property = "exec.processLogFile")
     protected String processLogFile;
 
+    @Parameter(defaultValue = "false", property = "exec.skip")
+    protected boolean skip;
+
     protected static File ensureDirectory(File dir) {
         if (!dir.mkdirs() && !dir.isDirectory()) {
             throw new RuntimeException("couldn't create directories: " + dir);

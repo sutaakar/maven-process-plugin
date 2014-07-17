@@ -48,6 +48,10 @@ public class ExecProcess {
             redirectors.add(new StdoutRedirector(new InputStreamReader(process.getErrorStream()), new MavenLogOutputStream(mavenLog, MavenLogOutputStream.ERROR)));
         } else {
             // pump to file log
+            if (!processLogFile.getParentFile().isDirectory() && !processLogFile.getParentFile().mkdir()) {
+                throw new IllegalStateException("Could not find or create directory containing " + processLogFile.getPath());
+            }
+
             final FileOutputStream out = openFileOutputStream(processLogFile);
             redirectors.add(new StdoutRedirector(new InputStreamReader(process.getInputStream()), out));
             redirectors.add(new StdoutRedirector(new InputStreamReader(process.getErrorStream()), out));
