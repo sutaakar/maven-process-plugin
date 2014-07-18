@@ -32,7 +32,7 @@ Improve end-to-end integration testing with maven. Process Executor Plugin allow
 * __processLogFile__: Optional. Specifying a log file will redirect the process output to the specified file. Recommended as this will avoid cluttering your build's log with the log of external proccesses.
 
 ## POM example:
-The latest version is 0.4.  
+The latest version is 0.5.
 
     <build>
         <plugins>

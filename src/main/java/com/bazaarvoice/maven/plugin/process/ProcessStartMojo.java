@@ -14,22 +14,21 @@ public class ProcessStartMojo extends AbstractProcessMojo {
     @Override
     public void execute()
             throws MojoExecutionException, MojoFailureException {
-
-        if (!skip) {
-            for (String arg : arguments) {
-                getLog().info("arg: " + arg);
-            }
-            getLog().info("Full command line: " + Joiner.on(" ").join(arguments));
-            try {
-                startProcess();
-                if (waitForInterrupt) {
-                    sleepUntilInterrupted();
-                }
-            } catch (Exception e) {
-                getLog().error(e);
-            }
-        } else {
+        if (skip) {
             getLog().info("Skipping " + name + " due to configuration skip=true");
+            return;
+        }
+        for (String arg : arguments) {
+            getLog().info("arg: " + arg);
+        }
+        getLog().info("Full command line: " + Joiner.on(" ").join(arguments));
+        try {
+            startProcess();
+            if (waitForInterrupt) {
+                sleepUntilInterrupted();
+            }
+        } catch (Exception e) {
+            getLog().error(e);
         }
     }
 
