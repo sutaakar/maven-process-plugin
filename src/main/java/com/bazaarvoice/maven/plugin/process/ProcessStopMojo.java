@@ -34,17 +34,7 @@ public class ProcessStopMojo extends AbstractProcessMojo {
             }
         }
 
-        getLog().info("Stopping all processes ...");
-        Stack<ExecProcess> processesStack = CrossMojoState.getProcesses(getPluginContext());
-        while(!processesStack.isEmpty()) {
-            ExecProcess execProcess = processesStack.pop();
-            if (execProcess != null) {
-                getLog().info("Stopping process: " + execProcess.getName());
-                execProcess.destroy();
-                execProcess.waitFor();
-                getLog().info("Stopped process: " + execProcess.getName());
-            }
-        }
+        internalStopProcesses();
     }
 
 }

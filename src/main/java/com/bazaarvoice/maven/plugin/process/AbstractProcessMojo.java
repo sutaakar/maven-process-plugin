@@ -7,6 +7,7 @@ import org.apache.maven.project.MavenProject;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Stack;
 
 public abstract class AbstractProcessMojo extends AbstractMojo {
     @Component
@@ -50,6 +51,32 @@ public abstract class AbstractProcessMojo extends AbstractMojo {
             int ch = System.in.read();
             if (ch == -1 || ch == '\n') {
                 break;
+            }
+        }
+    }
+
+    public AbstractProcessMojo() {
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+                Stack<ExecProcess> processesStack = CrossMojoState.getProcesses(getPluginContext());
+                // Let us stop any services that are still running
+                if (!processesStack.empty()) {
+                    internalStopProcesses();
+                }
+            }
+        });
+    }
+
+    protected void internalStopProcesses() {
+        getLog().info("Stopping all processes ...");
+        Stack<ExecProcess> processesStack = CrossMojoState.getProcesses(getPluginContext());
+        while(!processesStack.isEmpty()) {
+            ExecProcess execProcess = processesStack.pop();
+            if (execProcess != null) {
+                getLog().info("Stopping process: " + execProcess.getName());
+                execProcess.destroy();
+                execProcess.waitFor();
+                getLog().info("Stopped process: " + execProcess.getName());
             }
         }
     }
