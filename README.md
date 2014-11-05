@@ -31,15 +31,16 @@ Improve end-to-end integration testing with maven. Process Executor Plugin allow
 * __waitAfterLaunch__: Optional. This specifies the maximum time in seconds to wait after launching the process. If healthcheckUrl is specified, then it will move on as soon as the health checks pass. Default is 30 seconds.
 * __processLogFile__: Optional. Specifying a log file will redirect the process output to the specified file. Recommended as this will avoid cluttering your build's log with the log of external proccesses.
 
+*NOTE:* As of 0.7, killing the maven process (using Ctrl+C or kill <pid> command) will stop all the processes started by the plugin.
 ## POM example:
-The latest version is 0.5.
+The latest version is 0.7.
 
     <build>
         <plugins>
             <plugin>
                 <groupId>com.bazaarvoice.maven.plugins</groupId>
                 <artifactId>process-exec-maven-plugin</artifactId>
-                <version>0.5</version>
+                <version>0.7</version>
                 <executions>
                     <!--Start process 1, eg., a dropwizard app dependency-->
                     <execution>
