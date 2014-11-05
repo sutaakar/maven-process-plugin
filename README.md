@@ -40,7 +40,7 @@ The latest version is 0.7.
             <plugin>
                 <groupId>com.bazaarvoice.maven.plugins</groupId>
                 <artifactId>process-exec-maven-plugin</artifactId>
-                <version>0.5</version>
+                <version>0.7</version>
                 <executions>
                     <!--Start process 1, eg., a dropwizard app dependency-->
                     <execution>
