@@ -22,7 +22,7 @@ public class StdOutRedirectorTest {
     public void testRedirector(){
         ClassLoader classLoader = getClass().getClassLoader();
         String inputFile_string=classLoader.getResource("input.txt").getFile();
-        String outputFile_string=System.getProperty("java.io.tmpdir") + "redirected_input.txt";
+        String outputFile_string=System.getProperty("tmpDir") + "redirected_input.txt";
         FileReader inputFile = null;
         OutputStream outputFile = null;
 
@@ -51,7 +51,7 @@ public class StdOutRedirectorTest {
         ClassLoader classLoader = getClass().getClassLoader();
         String inputFile_string=classLoader.getResource("input2.txt").getFile();
         String expectedFile_string=classLoader.getResource("empty_file.txt").getFile();
-        String outputFile_string=System.getProperty("java.io.tmpdir") + "redirected_empty.txt";
+        String outputFile_string=System.getProperty("tmpDir") + "redirected_empty.txt";
         FileReader inputFile = null;
         OutputStream outputFile = null;
 
