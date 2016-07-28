@@ -1,0 +1,7 @@
+language: java
+
+before_install:
+  - export MAVEN_OPTS="-Xmx512M $MAVEN_OPTS"
+
+jdk:
+  - openjdk7
