@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bazaarvoice/maven-process-plugin.svg?branch=master)](https://travis-ci.org/bazaarvoice/maven-process-plugin)
+
 process-exec-maven-plugin
 ========================
 
